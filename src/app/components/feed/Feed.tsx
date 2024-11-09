@@ -76,13 +76,16 @@ const Feed= async({username}: {username?:string}) =>{
     }
     return(
         <div className="p-4 bg-white rounded-lg shadow-md flex flex-col gap-12">
-            {posts.length ? (posts.map(post =>(
-                <Post key={post.id} post={post}/>
-            ))) : "No posts found!"}
-            
-            
-            
-        </div>
+      {posts.length ? (
+        posts.map((post) => (
+          <div key={post.id} className="post-card"> {/* Added post-card class */}
+            <Post post={post} />
+          </div>
+        ))
+      ) : (
+        "No posts found!"
+      )}
+    </div>
     );
 };
 
