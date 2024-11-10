@@ -99,7 +99,7 @@ const AddPost = () => {
                     </div>
 
                     <div className="flex items-center gap-2 cursor-pointer">
-                        <Image src="/addEvent.png" alt="" width={20} height={20} />
+                        <Image src="/addevent.png" alt="" width={20} height={20} />
                         Event
                     </div>
 

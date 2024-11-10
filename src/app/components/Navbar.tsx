@@ -8,7 +8,6 @@ import { SignedIn, SignedOut } from '@clerk/nextjs';
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 
-// Define the User type to match the structure of the search results
 type User = {
     id: string;
     username: string;
@@ -23,7 +22,6 @@ const Navbar = () => {
     const [isDropdownVisible, setDropdownVisible] = useState(false);
     const router = useRouter();
 
-    // Fetch all possible matches from the API
     useEffect(() => {
         if (searchQuery.trim() === "") {
             setFilteredResults([]);
@@ -47,7 +45,6 @@ const Navbar = () => {
         fetchResults();
     }, [searchQuery]);
 
-    // Filter results on the client side to ensure case insensitivity
     useEffect(() => {
         if (searchQuery.trim() === "") {
             setFilteredResults([]);
@@ -62,43 +59,37 @@ const Navbar = () => {
         }
     }, [allResults, searchQuery]);
 
-    // Redirect to the profile page if username matches
     const handleSelectUser = (username: string) => {
         router.push(`/profile/${username}`);
         setSearchQuery("");
-        setFilteredResults([]);  // Clear results after selection
+        setFilteredResults([]); 
         setDropdownVisible(false);
     };
 
     return (
-        <div className="h-24 flex items-center justify-between">
-            {/* Left */}
+        <div className="h-24 flex items-center justify-between px-4 sm:px-8">
             <div className="md:hidden lg:block w-[20%]">
                 <Link href="/" className="font-bold text-xl"><img src="/logo.png" alt="" /></Link>
             </div>
             
-            {/* Center */}
-            <div className="hidden md:flex w-[50%] text-sm ml-10 items-center justify-between">
-                {/* Links */}
-                <div className="flex gap-6 text-gray-600 ">
+            <div className="flex w-full lg:w-[50%] text-sm items-center justify-between">
+                <div className="hidden md:flex gap-6 text-gray-600">
                     <Link href="/" className="flex items-center gap-2">
                         <Image src="/home.png" alt="HomePage" width={16} height={16} className="w-4 h-4"/>
                         <span>Homepage</span>
                     </Link>
-
                     <Link href="/" className="flex items-center gap-2">
                         <Image src="/friends.png" alt="Friends" width={16} height={16} className="w-4 h-4"/>
                         <span>Friends</span>
                     </Link>
-
                     <Link href="/" className="flex items-center gap-2">
                         <Image src="/stories.png" alt="Stories" width={16} height={16} className="w-4 h-4"/>
-                        <span>stories</span>
+                        <span>Stories</span>
                     </Link>
                 </div>
                 
                 {/* Search Box */}
-                <div className="relative hidden xl:flex items-center w-64"> {/* Set a fixed width here */}
+                <div className="relative flex items-center w-full max-w-xs sm:max-w-md lg:max-w-[50%] ml-4"> {/* Adjust left margin here */}
                     <div className="p-2 bg-slate-100 flex items-center rounded-xl w-full">
                         <input
                             type="text"
@@ -110,7 +101,6 @@ const Navbar = () => {
                         <Image src="/search.png" alt="" width={14} height={14} />
                     </div>
 
-                    {/* Search Results Dropdown */}
                     {isDropdownVisible && filteredResults.length > 0 && (
                         <div className="absolute top-full mt-1 left-0 bg-white border rounded-md w-full shadow-md z-10 max-h-48 overflow-y-auto">
                             {filteredResults.slice(0, 8).map((user) => ( 
@@ -137,7 +127,6 @@ const Navbar = () => {
                 </div>
             </div>
             
-            {/* Right */}
             <div className="w-[30%] flex items-center gap-4 xl:gap-8 justify-end mr-4">
                 <ClerkLoading>
                     <div className="inline-block h-4 w-4 animate-spin rounded-full border-2 border-gray-500 border-solid border-current border-e-transparent align-[-0.125em] text-surface motion-reduce:animate-[spin_1.5s_linear_infinite] dark:text-white" role="status"></div>

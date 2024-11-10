@@ -42,3 +42,11 @@ body {
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
 }
+
+@media (max-width: 640px) {
+  /* Targeting small screens, typically mobile */
+  body, p, span, a, li, div, Link, input{
+    color: #000000 !important; /* Ensure dark black text */
+    font-weight: 500; /* Optional: Increase font weight for readability */
+  }
+}
