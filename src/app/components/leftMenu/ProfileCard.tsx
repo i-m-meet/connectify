@@ -41,9 +41,11 @@ const ProfileCard =async ()=> {
 
                         <Image src="https://images.pexels.com/photos/27958424/pexels-photo-27958424/free-photo-of-portrait-of-smiling-woman-in-dress-standing-among-yellow-flowers.jpeg?auto=compress&cs=tinysrgb&w=800&lazy=load" alt=""  width={12} height={12} className="rounded-full w-3 h-3  object-cover"/>
                         </div>
-                        <span className="text-xs text-gray-500">{user._count.followers}</span>
+                        
                     </div>
-                    <button className="bg-blue-500 text-white text-xs p-2 rounded-md"> My Profile</button>
+                    <span className="text-md font-semibold text-gray-800">{user._count.followers} Followers</span>
+                    
+                    {/* <button className="bg-blue-500 text-white text-xs p-2 rounded-md"> My Profile</button> */}
                 </div>
 
             </div>

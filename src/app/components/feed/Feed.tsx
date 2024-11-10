@@ -75,7 +75,7 @@ const Feed= async({username}: {username?:string}) =>{
         });
     }
     return(
-        <div className="p-4 bg-white rounded-lg shadow-md flex flex-col gap-12">
+        <div className="p-4 bg-slate-100 rounded-lg shadow-md flex flex-col gap-12">
       {posts.length ? (
         posts.map((post) => (
           <div key={post.id} className="post-card"> {/* Added post-card class */}

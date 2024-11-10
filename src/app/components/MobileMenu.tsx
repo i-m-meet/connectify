@@ -7,8 +7,8 @@ import { UserButton } from "@clerk/nextjs";
 import { useUser } from "@clerk/nextjs";
 
 const MobileMenu = () => {
-    const [isOpen, setIsOpen] = useState(false);
     const router = useRouter();
+    const [isOpen, setIsOpen] = useState(false);
     const { user } = useUser();
 
     const handleLinkClick = (path: string) => {
