@@ -14,14 +14,15 @@ const RightMenu=({user}:{user?: User}) =>{
             <UserInfoCard user={user}/>
             </Suspense>
 
+            {/* Freind requests */}
+            <FriendRequests/>
+
             <Suspense  fallback="Loading...">
             <UserMediaCard user={user}/>
             </Suspense>
 
             </>) : null}
-            {/* Freind requests */}
             
-            <FriendRequests/>
             <Birthdays/>
             <Ads size="md"/>
             

@@ -2,7 +2,7 @@ import Image from "next/image";
 
 const Ads =({size}:{size: "sm" | "md" | "lg"}) => {
     return(
-        <div className="p-4 bg-white rounded-lg shadow-md text-sm">
+        <div className=" hidden md:block p-4 bg-white rounded-lg shadow-md text-sm">
             {/* Top  */}
             <div className="flex  items-center justify-between text-gray-500 font-medium">
             <span>Sponsored Ad</span>

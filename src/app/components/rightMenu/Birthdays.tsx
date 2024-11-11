@@ -3,7 +3,7 @@ import Link from "next/link";
 
 const Birthdays =() => {
     return(
-        <div className="p-4 bg-white rounded-lg shadow-md text-sm flex flex-col gap-4">
+        <div className="hidden md:block p-4 bg-white rounded-lg shadow-md text-sm  flex-col gap-4 ">
             {/* headeing */}
             <div className=" flex items-center justify-between font-md">
                 <span className="text-gray-500">Birthdays</span>

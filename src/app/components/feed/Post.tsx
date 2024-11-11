@@ -18,10 +18,10 @@ const Post=({post}:{post:FeedPostType}) =>{
         </div>
         {/* Description div */}
         <div className="flex flex-col gap-4">
+            <p>{post.desc}</p>
             { post.img &&<div className="w-full min-h-96 relative">
                 <Image src={post.img} alt="" fill className="object-cover rounded-md"/>
             </div>}
-            <p>{post.desc}</p>
             
         </div>
         {/* Interaction div */}

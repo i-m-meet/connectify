@@ -77,7 +77,8 @@ const ProfilePage = async ({ params }: { params: { username: string } }) => {
 
             {/* UserInfoCard Visible Only on Small Screens */}
             <div className="block lg:hidden">
-              <UserInfoCard user={user} />
+              {/* <UserInfoCard user={user} /> */}
+              <RightMenu user={user}/>
             </div>
           </div>
 
