@@ -11,100 +11,104 @@ type StoryWithUser = Story & {
   user: User;
 };
 
-const StoryList = ({ stories, userId }: { stories: StoryWithUser[]; userId: string }) => {
+const StoryList = ({
+  stories,
+  userId,
+}: {
+  stories: StoryWithUser[];
+  userId: string;
+}) => {
   const [storyList, setStoryList] = useState(stories);
-  const [img, setImg] = useState<any>(null);
-  const { user } = useUser();
+  const [img, setImg] = useState<any>();
 
-  const [optimisticStories, addOptimisticStory] = useOptimistic(
-    storyList,
-    (state, value: StoryWithUser) => [value, ...state]
-  );
+  const { user, isLoaded } = useUser();
 
-  const handleAddStory = async () => {
+  const add = async () => {
     if (!img?.secure_url) return;
 
-    // Optimistically add the story
-    const optimisticStory: StoryWithUser = {
-      id: Math.random(), // Generate a random ID
+    addOptimisticStory({
+      id: Math.random(),
       img: img.secure_url,
-      createdAt: new Date(),
-      expiresAt: new Date(Date.now() + 24 * 60 * 60 * 1000), // 24 hours
+      createdAt: new Date(Date.now()),
+      expiresAt: new Date(Date.now() + 24 * 60 * 60 * 1000),
       userId: userId,
       user: {
         id: userId,
-        username: user?.username || "User",
+        username: "Sending...",
         avatar: user?.imageUrl || "/noAvatar.png",
         cover: "",
         description: "",
-        name: user?.fullName || "",
+        name: "",
         surname: "",
         city: "",
         work: "",
         school: "",
         website: "",
-        createdAt: new Date(),
+        createdAt: new Date(Date.now()),
       },
-    };
-
-    // addOptimisticStory(optimisticStory);
+    });
 
     try {
       const createdStory = await addStory(img.secure_url);
       setStoryList((prev) => [createdStory!, ...prev]);
-    } catch (err) {
-      console.error("Error adding story:", err);
-    } finally {
-      setImg(null); // Clear the image after adding the story
-    }
+      setImg(null)
+    } catch (err) {}
   };
 
+  const [optimisticStories, addOptimisticStory] = useOptimistic(
+    storyList,
+    (state, value: StoryWithUser) => [value, ...state]
+  );
   return (
     <>
       <CldUploadWidget
         uploadPreset="connectify"
         onSuccess={(result, { widget }) => {
-          if (result.info) {
-            setImg(result.info);
-          }
+          setImg(result.info);
           widget.close();
         }}
       >
-        {({ open }) => (
-          <div className="flex flex-col items-center gap-2 cursor-pointer relative">
-            <Image
-              src={img?.secure_url || user?.imageUrl || "/noAvatar.png"}
-              alt="User Avatar"
-              width={80}
-              height={80}
-              className="w-20 h-20 rounded-full ring-2 object-cover"
-              onClick={() => open()}
-            />
-            {img ? (
-              <button
-                className="text-xs bg-blue-500 p-1 rounded-md text-white"
-                onClick={handleAddStory}
-              >
-                Send
-              </button>
-            ) : (
-              <span className="font-medium">Add a story</span>
-            )}
-            <div className="absolute text-6xl text-gray-200 top-1">+</div>
-          </div>
-        )}
+        {({ open }) => {
+          return (
+            <div className="flex flex-col items-center gap-2 cursor-pointer relative">
+              <Image
+                src={img?.secure_url || user?.imageUrl || "/noAvatar.png"}
+                alt=""
+                width={80}
+                height={80}
+                className="w-20 h-20 rounded-full ring-2 object-cover"
+                onClick={() => open()}
+              />
+              {img ? (
+                <form action={add}>
+                  <button className="text-xs bg-blue-500 p-1 rounded-md text-white">
+                    Send
+                  </button>
+                </form>
+              ) : (
+                <span className="font-medium">Add a Story</span>
+              )}
+              <div className="absolute text-6xl text-gray-200 top-1">+</div>
+            </div>
+          );
+        }}
       </CldUploadWidget>
-
+      {/* STORY */}
       {optimisticStories.map((story) => (
-        <div className="flex flex-col items-center gap-2 cursor-pointer" key={story.id}>
+        <div
+          className="flex flex-col items-center gap-2 cursor-pointer"
+          key={story.id}
+        >
           <Image
             src={story.user.avatar || "/noAvatar.png"}
-            alt={`${story.user.username}'s Avatar`}
+            alt=""
             width={80}
             height={80}
-            className="w-20 h-20 rounded-full ring-2 object-cover"
+            className="w-20 h-20 rounded-full ring-2"
           />
-          <span className="font-medium">{story.user.name || story.user.username}</span>
+          <span className="font-medium">
+            {story.user.name || story.user.username}
+          </span>
         </div>
       ))}
     </>
