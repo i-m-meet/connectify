@@ -49,7 +49,7 @@ const PostInteraction = ({postId,likes,commentNumber} :{postId:number, likes:str
                 <div className="flex items-center gap-4 bg-slate-50 p-2 rounded-xl">
                     <Image src="/comment.png" alt="" width={16} height={16}/>
                     <span className="text-gray-300">|</span>
-                    <span className="text-gray-500">456 <span className="hidden md:inline"> Comments</span></span>
+                    <span className="text-gray-500">{commentNumber} <span className="hidden md:inline"> Comments</span></span>
                     </div>
                     <div className="flex items-center gap-4 bg-slate-50 p-2 rounded-xl">
                         <Image src="/share.png" alt="" width={16} height={16}/>

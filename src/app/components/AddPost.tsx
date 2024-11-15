@@ -85,12 +85,13 @@ const AddPost = () => {
                             widget.close();
                         }}
                     >
-                        {({ open }) => (
+                        {({ open }) => {
+                            return(
                             <div className="flex items-center gap-2 cursor-pointer" onClick={() => open()}>
                                 <Image src="/addimage.png" alt="" width={20} height={20} />
                                 Photo
                             </div>
-                        )}
+                        )}}
                     </CldUploadWidget>
 
                     <div className="flex items-center gap-2 cursor-pointer">

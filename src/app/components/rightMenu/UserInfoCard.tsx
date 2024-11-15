@@ -79,10 +79,10 @@ const UserInfoCard = async ({user}: {user: User}) => {
                 <Image src="/link.png" alt="" width={16} height={16}/>
                 <Link href={user.website} className="text-blue-500 font-medium">{user.website}</Link>
             </div>}
+            </div>
             <div className="flex gap-1 items-center">
             <Image src="/date.png" alt="" width={16} height={16}/> 
             <span> Joined {formattedDate}</span>
-            </div>
             </div>
             { (currentUserId && currentUserId !==user.id) && <UserInfoCardInteraction 
             userId ={user.id}
